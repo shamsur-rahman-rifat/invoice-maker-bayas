@@ -1,0 +1,133 @@
+/* ===== PAGE SETUP ===== */
+#invoice {
+  width: 760px;                 /* Slightly narrower for A4 look */
+  margin: 30px auto;
+  padding: 40px 45px;           /* MORE breathing room */
+  font-family: "Times New Roman", serif;
+  background: white;
+  color: black;
+  box-shadow: 0 0 6px rgba(0,0,0,0.15); /* subtle page feel */
+}
+
+/* ===== HEADER ===== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.tagline {
+  font-style: italic;
+  margin-top: -2px;
+  font-size: 13px;
+}
+
+.right {
+  text-align: right;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* ===== DIVIDER ===== */
+hr {
+  border: none;
+  border-top: 2px solid green;
+  margin: 20px 0 30px;
+}
+
+/* ===== TITLES ===== */
+.center {
+  text-align: center;
+  margin: 15px 0;
+}
+
+.underline {
+  text-decoration: underline;
+  margin-bottom: 15px;
+}
+
+/* ===== INFO SECTION ===== */
+.info {
+  display: flex;
+  justify-content: space-between;
+  margin: 25px 0 15px;
+}
+
+.info p {
+  margin: 4px 0;
+}
+
+.pc {
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+/* ===== TABLE ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+th {
+  text-align: center;
+  font-weight: bold;
+}
+
+th, td {
+  padding: 8px 6px;            /* better vertical spacing */
+  vertical-align: top;
+}
+
+.desc {
+  text-align: left;
+}
+
+/* ===== TOTAL ===== */
+.total-row td {
+  font-weight: bold;
+}
+
+/* ===== VALIDITY ===== */
+.validity {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 35px;
+  letter-spacing: 0.3px;
+}
+
+/* ===== SIGNATURE ===== */
+.signature {
+  margin-top: 55px;
+}
+
+.signature p {
+  margin: 4px 0;
+}
+
+/* ===== PRINT MODE ===== */
+@media print {
+  body {
+    background: white;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  #invoice, #invoice * {
+    visibility: visible;
+  }
+
+  #invoice {
+    box-shadow: none;
+    margin: 0;
+    padding: 35px 40px;
+  }
+}
