@@ -1,4 +1,7 @@
 import "./invoice.css";
+import logo from "../../assets/bayas-logo.png";
+import seal from "../../assets/bayas-seal.png";
+
 
 export default function Invoice({ data }) {
   const isInvoice = data.type === "invoice";
@@ -17,17 +20,20 @@ export default function Invoice({ data }) {
     <div id="invoice">
       <div className="invoice-page">
       <div className="header">
+      <div className="company">
+        <img src={logo} alt="BAYAS Logo" className="logo" />
         <div>
-          <h1>Tech Baya</h1>
-          <p className="tagline">A Complete Web IT Solution</p>
+          <h1>BAYAS</h1>
+          <p className="tagline">Fast. Friendly. Reliable.</p>
         </div>
+      </div>
 
         <div className="right">
-          <p>
-            www.techbaya.com<br />
-            E-mail: info@tachbaya.com<br />      
+          <p> 
+            House - 216, East Chanpara, Uttarkhan, Dhaka - 1230<br />
             Phone: 01712644590, 01715618953<br />
-            House - 216, East Chanpara, Uttarkhan, Dhaka - 1230
+            E-mail: support@bayas.com.bd<br />    
+            Website: bayas.com.bd
           </p>
         </div>
       </div>
@@ -86,16 +92,17 @@ export default function Invoice({ data }) {
       </table>
 
       <p className="validity">
-          {isInvoice ? "PAYMENT DUE WITHIN 3 DAYS": "VALIDITY: 3 DAYS FROM THE DATE OF QUOTATION"}
+          {isInvoice ? "VALIDITY: 3 DAYS FROM THE DATE OF INVOICE": "VALIDITY: 3 DAYS FROM THE DATE OF QUOTATION"}
       </p>
 
       <div className="signature">
-        <p><strong>Tech Baya</strong></p>
+        <p><strong>BAYAS</strong></p>
         <p><strong>Proprietor</strong></p>
         <p>Abu Syeed Sarker</p>
         <p>Mobile: 01715618953</p>
-        <p>E-mail: info@tachbaya.com</p>
+        <p>E-mail: support@bayas.com.bd</p>
       </div>
+      <img src={seal} alt="Company Seal" className="invoice-seal" />
     </div>
   </div>
   );

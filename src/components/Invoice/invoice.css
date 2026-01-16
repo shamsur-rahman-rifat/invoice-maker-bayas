@@ -14,7 +14,6 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 20px;
 }
 
 .tagline {
@@ -27,6 +26,19 @@
   text-align: right;
   font-size: 12px;
   line-height: 1.4;
+  margin-top: 39px;
+}
+
+/* ===== COMPANY LOGO ===== */
+.company {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo {
+  width: 150px;
+  height: auto;
 }
 
 /* ===== DIVIDER ===== */
@@ -130,4 +142,17 @@ th, td {
     margin: 0;
     padding: 35px 40px;
   }
+}
+
+/* ===== COMPANY SEAL ===== */
+#invoice {
+  position: relative;
+}
+
+.invoice-seal {
+  position: absolute;
+  bottom: 40px;     
+  right: 45px;      
+  width: 140px;
+  pointer-events: none;
 }
