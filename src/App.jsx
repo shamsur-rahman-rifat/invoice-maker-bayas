@@ -47,7 +47,7 @@ export default function App() {
         <div className="row justify-content-center mb-4">
           <div className="col-12 col-xl-10 text-center">
             <h2 className="fw-bold text-dark">Invoice Maker</h2>
-            <p className="text-muted">Create and download invoices or quotations</p>
+            <p className="text-muted">Create and download invoices or quotations for BAYAS</p>
           </div>
         </div>
 
