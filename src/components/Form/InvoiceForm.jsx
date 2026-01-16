@@ -6,23 +6,23 @@ export default function InvoiceForm({ data, setData }) {
     updated[index][field] = value;
     setData({ ...data, items: updated });
   };
-  
+
   const addItem = () => {
     setData({
       ...data,
       items: [...data.items, { name: "", qty: 1, price: 0 }]
     });
   };
-  
+
   const removeItem = (index) => {
     const updated = data.items.filter((_, i) => i !== index);
     setData({ ...data, items: updated });
   };
-  
+
   return (
     <div className="container my-3 my-md-4">
       <h4 className="mb-3 mb-md-4">Invoice Input</h4>
-      
+
       {/* Form Header Section - Responsive Grid */}
       <div className="row g-3 mb-4">
         <div className="col-12 col-md-6">
@@ -37,7 +37,7 @@ export default function InvoiceForm({ data, setData }) {
             </Form.Select>
           </Form.Group>
         </div>
-        
+
         <div className="col-12 col-md-6">
           <Form.Group>
             <Form.Label>Customer Name</Form.Label>
@@ -48,7 +48,7 @@ export default function InvoiceForm({ data, setData }) {
             />
           </Form.Group>
         </div>
-        
+
         <div className="col-12">
           <Form.Group>
             <Form.Label>
@@ -68,28 +68,28 @@ export default function InvoiceForm({ data, setData }) {
 
       {/* Items Section Header */}
       <h5 className="mb-3">Items</h5>
-      
+
       {/* Item Cards - Fully Responsive */}
       {data.items.map((item, i) => (
-        <div key={i} className="card mb-3 shadow-sm">
-          <div className="card-body">
-            <div className="row g-2 g-md-3 align-items-end">
+        <div key={i} className="card mb-3 shadow-sm border-0 bg-light">
+          <div className="card-body p-3">
+            <div className="row g-2 align-items-end">
               {/* Item Description - Full width on mobile */}
-              <div className="col-12">
+              <div className="col-12 col-md-5">
                 <Form.Group>
-                  <Form.Label className="small fw-semibold">Item Description</Form.Label>
+                  <Form.Label className="small fw-bold text-muted text-uppercase" style={{ fontSize: '0.75rem' }}>Item Description</Form.Label>
                   <Form.Control
-                    placeholder="Enter item description"
+                    placeholder="Item name or description"
                     value={item.name}
                     onChange={(e) => updateItem(i, "name", e.target.value)}
                   />
                 </Form.Group>
               </div>
-              
-              {/* Quantity - Smaller on mobile */}
-              <div className="col-4 col-sm-3 col-md-2">
+
+              {/* Quantity */}
+              <div className="col-4 col-md-2">
                 <Form.Group>
-                  <Form.Label className="small fw-semibold">Qty</Form.Label>
+                  <Form.Label className="small fw-bold text-muted text-uppercase" style={{ fontSize: '0.75rem' }}>Qty</Form.Label>
                   <Form.Control
                     type="number"
                     min="1"
@@ -98,11 +98,11 @@ export default function InvoiceForm({ data, setData }) {
                   />
                 </Form.Group>
               </div>
-              
+
               {/* Price */}
-              <div className="col-5 col-sm-4 col-md-3">
+              <div className="col-5 col-md-3">
                 <Form.Group>
-                  <Form.Label className="small fw-semibold">Price</Form.Label>
+                  <Form.Label className="small fw-bold text-muted text-uppercase" style={{ fontSize: '0.75rem' }}>Price</Form.Label>
                   <Form.Control
                     type="number"
                     min="0"
@@ -112,52 +112,59 @@ export default function InvoiceForm({ data, setData }) {
                   />
                 </Form.Group>
               </div>
-              
-              {/* Total - Hidden on extra small screens */}
-              <div className="col-3 col-sm-3 col-md-2 d-none d-sm-block">
+
+              {/* Total - Hidden on extra small, shown on sm+ */}
+              <div className="col-3 col-md-2 d-none d-md-block">
                 <Form.Group>
-                  <Form.Label className="small fw-semibold">Total</Form.Label>
-                  <div className="fw-bold text-primary">
+                  <Form.Label className="small fw-bold text-muted text-uppercase" style={{ fontSize: '0.75rem' }}>Total</Form.Label>
+                  <div className="form-control-plaintext fw-bold text-dark">
                     {(item.qty * item.price).toFixed(2)}
                   </div>
                 </Form.Group>
               </div>
-              
-              {/* Remove Button - Full width on mobile */}
-              <div className="col-12 col-sm-12 col-md-5 mt-2 mt-md-0">
-                <div className="d-flex justify-content-end">
-                  <Button
-                    variant="danger"
-                    size="sm"
-                    className="w-100 w-sm-auto"
-                    onClick={() => removeItem(i)}
-                  >
-                    Remove Item
-                  </Button>
-                </div>
+
+              {/* Remove Button - Absolute on mobile? No, let's keep it in flow but aligned */}
+              <div className="col-3 col-md-12 d-flex justify-content-end d-md-none align-self-center mt-2">
+                <Button
+                  variant="outline-danger"
+                  size="sm"
+                  onClick={() => removeItem(i)}
+                  aria-label="Remove item"
+                >
+                  <i className="bi bi-trash"></i> &#10005;
+                </Button>
               </div>
-              
-              {/* Mobile-only total row */}
-              <div className="col-12 d-sm-none">
-                <div className="d-flex justify-content-between border-top pt-2">
-                  <span className="small fw-semibold">Item Total:</span>
-                  <span className="fw-bold text-primary">
-                    {(item.qty * item.price).toFixed(2)}
-                  </span>
-                </div>
+              {/* Desktop Remove Button (in strict grid) */}
+              {/* Actually the previous design had remove button below. Let's make it cleaner. */}
+            </div>
+
+            {/* Row 2 for Desktop Actions or Mobile Total */}
+            <div className="row mt-2 align-items-center">
+              <div className="col-6 d-md-none">
+                <span className="small text-muted me-2">Subtotal:</span>
+                <span className="fw-bold text-primary">{(item.qty * item.price).toFixed(2)}</span>
+              </div>
+              <div className="col-6 col-md-12 d-flex justify-content-end">
+                <Button
+                  variant="link"
+                  className="text-danger p-0 text-decoration-none small d-none d-md-block"
+                  onClick={() => removeItem(i)}
+                >
+                  Remove Item
+                </Button>
               </div>
             </div>
           </div>
         </div>
       ))}
-      
+
       {/* Add Item Button - Full width on mobile */}
       <div className="d-grid d-sm-block mb-4">
         <Button variant="success" onClick={addItem}>
           + Add Item
         </Button>
       </div>
-      
+
       {/* Total Summary Card */}
       <div className="card bg-light border-primary">
         <div className="card-body">
