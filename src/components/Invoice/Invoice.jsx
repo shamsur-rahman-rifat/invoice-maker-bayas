@@ -40,8 +40,6 @@ export default function Invoice({ data }) {
 
       <hr />
 
-      <h2 className="center">{isInvoice ? "INVOICE" : "QUOTATION"}</h2>
-
       <div className="info">
         <div>
           <p><strong>TO,</strong></p>
