@@ -5,6 +5,7 @@ import { generatePDF } from "./utils/generatePDF";
 import { formatDate } from "./utils/formatDate";
 
 export default function App() {
+  const [isGenerating, setIsGenerating] = useState(false);
   const [data, setData] = useState({
     type: "quotation",
     customer: "ABU SAYED",
@@ -39,6 +40,18 @@ export default function App() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const handleDownload = async () => {
+    setIsGenerating(true);
+    try {
+      await generatePDF(data);
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+      alert("Failed to generate PDF. Please try again.");
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
   return (
     <div className="container-fluid bg-light min-vh-100 py-4">
 
@@ -68,10 +81,20 @@ export default function App() {
             <div className="d-grid">
               <button
                 className="btn btn-primary btn-lg shadow rounded-pill"
-                onClick={() => generatePDF(data)}
+                onClick={handleDownload}
+                disabled={isGenerating}
               >
-                <i className="bi bi-download me-2"></i>
-                Download PDF
+                {isGenerating ? (
+                  <>
+                    <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                    Generating...
+                  </>
+                ) : (
+                  <>
+                    <i className="bi bi-download me-2"></i>
+                    Download PDF
+                  </>
+                )}
               </button>
             </div>
           </div>
