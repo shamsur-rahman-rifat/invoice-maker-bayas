@@ -151,8 +151,8 @@ th, td {
 
 .invoice-seal {
   position: absolute;
-  bottom: 40px;     
-  right: 45px;      
-  width: 140px;
+  bottom: 80px;     
+  right: 90px;      
+  width: 70px;
   pointer-events: none;
 }
