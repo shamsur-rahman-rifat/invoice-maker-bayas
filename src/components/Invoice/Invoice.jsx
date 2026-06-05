@@ -89,15 +89,11 @@ export default function Invoice({ data }) {
         </tbody>
       </table>
 
-      <p className="validity">
-          {isInvoice ? "VALIDITY: 3 DAYS FROM THE DATE OF INVOICE": "VALIDITY: 3 DAYS FROM THE DATE OF QUOTATION"}
-      </p>
-
       <div className="signature">
         <p><strong>BAYAS</strong></p>
         <p><strong>Proprietor</strong></p>
         <p>Abu Syeed Sarker</p>
-        <p>Mobile: 01715618953</p>
+        <p>Mobile: 01712644590</p>
         <p>E-mail: support@bayas.com.bd</p>
       </div>
       <img src={seal} alt="Company Seal" className="invoice-seal" />
