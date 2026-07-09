@@ -1,19 +1,22 @@
 import { useState, useEffect, useRef } from "react";
+import { AuthProvider, useAuth } from "./context/AuthContext";
+import LoginPage from "./pages/LoginPage";
 import Invoice from "./components/Invoice/Invoice";
 import InvoiceForm from "./components/Form/InvoiceForm";
 import { generatePDF } from "./utils/generatePDF";
 import { formatDate } from "./utils/formatDate";
+import { Button } from "react-bootstrap";
 
-export default function App() {
+// ---------- Auth-gated invoice app ----------
+function InvoiceApp() {
+  const { user, logout } = useAuth();
   const [isGenerating, setIsGenerating] = useState(false);
   const [data, setData] = useState({
     type: "quotation",
     customer: "ABU SAYED",
     date: formatDate(),
     serial: "001",
-    items: [
-      { name: "Intel Core i5 12th Gen Processor", qty: 1, price: 25000 }
-    ]
+    items: [{ name: "Intel Core i5 12th Gen Processor", qty: 1, price: 25000 }]
   });
 
   // Scaling logic for Invoice Preview
@@ -54,6 +57,14 @@ export default function App() {
 
   return (
     <div className="container-fluid bg-light min-vh-100 py-4">
+
+      {/* Top bar with user info & logout */}
+      <div className="container mb-3">
+        <div className="d-flex justify-content-between align-items-center">
+          <span className="text-muted small">Signed in as <strong>{user?.username}</strong></span>
+          <Button variant="outline-secondary" size="sm" onClick={logout}>Sign Out</Button>
+        </div>
+      </div>
 
       <div className="container">
         {/* Header */}
@@ -132,4 +143,27 @@ export default function App() {
       </div>
     </div>
   );
+}
+
+// ---------- Root App with auth routing ----------
+export default function App() {
+  return (
+    <AuthProvider>
+      <AppShell />
+    </AuthProvider>
+  );
+}
+
+function AppShell() {
+  const { user, isLoading } = useAuth();
+
+  if (isLoading) {
+    return (
+      <div className="min-vh-100 d-flex align-items-center justify-content-center">
+        <div className="spinner-border text-primary" role="status"></div>
+      </div>
+    );
+  }
+
+  return user ? <InvoiceApp /> : <LoginPage />;
 }

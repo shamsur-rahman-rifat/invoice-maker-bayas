@@ -10,7 +10,7 @@ export default function Invoice({ data }) {
   const serial = data.serial
     ? String(data.serial).padStart(3, "0")
     : "___";
-  const refNo = `TB/${docCode}/${year}/${serial}`;
+  const refNo = `BS/${docCode}/${year}/${serial}`;
   const total = data.items.reduce(
     (sum, item) => sum + item.qty * item.price,
     0
